@@ -12,5 +12,7 @@ public class CarroTeste {
         van.exibirAutonomia();
         double autonomia = van.obterAutonomia();
         System.out.println("autonomia do carro é: "+ autonomia);
+        double qtdCombustivel = van.calcularCombustivel(20);
+        System.out.println(qtdCombustivel);
     }
 }
