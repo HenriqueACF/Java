@@ -2,19 +2,20 @@ package JavaPOO;
 
 public class CarroObjeto {
 
-    public CarroObjeto(String marca_, String modelo_,
-                       int numPassageiros_, double capCombistivel_, double consumoCombustivel_){
-        marca = marca_;
-        modelo = modelo_;
-        numPassageiros = numPassageiros_;
-        capCombistivel = capCombistivel_;
-        consumoCombustivel = consumoCombustivel_;
-    }
     String marca;
     String modelo;
     int numPassageiros;
     double capCombistivel;
     double consumoCombustivel;
+
+    public CarroObjeto(String marca, String modelo,
+                       int numPassageiros, double capCombistivel, double consumoCombustivel){
+        this.marca = marca;
+        this.modelo = modelo;
+        this.numPassageiros = numPassageiros;
+        this.capCombistivel = capCombistivel;
+        this.consumoCombustivel = consumoCombustivel;
+    }
 
     // metodos simples
     void exibirAutonomia(){
