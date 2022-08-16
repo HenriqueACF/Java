@@ -19,10 +19,14 @@ public class TryCatch {
         for(int i = 0; i< numeros.length; i++){
             try{
                 System.out.println(numeros[i] + "/" + denominadores[i] + " = " + (numeros[i]/denominadores[i]));
-            } catch (ArithmeticException e1){
-                System.out.println("erro ao dividir por zero");
-            } catch (ArrayIndexOutOfBoundsException e2){
-                System.out.println("posição do array invalida ");
+            }
+            //catch (ArithmeticException e1){
+//                System.out.println("erro ao dividir por zero");
+//            } catch (ArrayIndexOutOfBoundsException e2){
+//                System.out.println("posição do array invalida ");
+//            }
+            catch (Throwable e){
+                System.out.println("ocorreu um erro");
             }
         }
 
