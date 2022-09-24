@@ -1,3 +1,5 @@
+import Correntista.Correntista;
+
 public class Banco {
     public static void main(String[] args){
         Correntista correntista1 = new Correntista( "Henrique");

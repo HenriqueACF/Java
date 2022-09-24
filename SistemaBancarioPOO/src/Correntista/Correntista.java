@@ -1,13 +1,17 @@
+package Correntista;
+
 public class Correntista {
     private static int proxCodigo = 1;
-
     private int codigo;
     private String nome;
 
     public Correntista(String nome) {
-        this.codigo = proxCodigo;
-        proxCodigo++;
+        codigo = getProxCodigo();
         this.nome = nome;
+    }
+
+    public static int getProxCodigo() {
+        return proxCodigo++;
     }
 
     public String getNome() {
