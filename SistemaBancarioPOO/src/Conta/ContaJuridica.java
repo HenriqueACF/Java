@@ -3,6 +3,8 @@ import Conta.Interface.Conta;
 
 public class ContaJuridica implements Conta {
     private double saldo = 0.0;
+    //I = taxa de juros
+    public static final double I = 0.05;
 
     @Override
     public void extrato() {
@@ -23,5 +25,10 @@ public class ContaJuridica implements Conta {
         }else{
             System.out.println("Saldo insuficiente");
         }
+    }
+
+    @Override
+    public double simulaEmprestimo(double cf, int n) {
+        return I/(1-1/Math.pow(1+I, n))*cf;
     }
 }
