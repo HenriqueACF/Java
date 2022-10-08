@@ -1,6 +1,8 @@
 package Conta.Interface;
 
-public interface Conta {
+import java.io.Serializable;
+
+public interface Conta extends Serializable {
 
     void extrato();
     void deposito(double valor);

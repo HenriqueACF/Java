@@ -3,21 +3,77 @@ import Conta.ContaJuridica;
 import Correntista.Correntista;
 import Correntista.CorrentistaFisico;
 import Correntista.CorrentistaJuridico;
+import java.io.*;
 import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Collection;
 
 public class Banco {
+    private ArrayList<Correntista> listaDeClientes;
+    public Banco() {
+        listaDeClientes = new ArrayList<Correntista>();
+    }
+
+    public Collection<Correntista> getListaDeClientes() {
+        return listaDeClientes;
+    }
+
+    public void setListaDeClientes(Collection<Correntista> c){
+        this.listaDeClientes = new ArrayList<>(c);
+    }
+    void SalvaClientes() throws IOException {
+        File file = new File("Database.dat");
+        FileOutputStream fos = new FileOutputStream(file);
+        ObjectOutputStream oos = new ObjectOutputStream(fos);
+
+        for(Correntista c: listaDeClientes){
+            oos.writeObject(c);
+        }
+        //fecha fluxo
+        oos.close();
+    }
+    void leClientes() throws IOException, ClassNotFoundException {
+        File file = new File("Database.dat");
+        FileInputStream fis = new FileInputStream(file);
+        ObjectInputStream ois = new ObjectInputStream(fis);
+
+        Object obj = null;
+        try{
+            while ((obj = ois.readObject()) != null) {
+                this.listaDeClientes.add((Correntista) obj);
+            }
+        } catch (EOFException e){
+
+        }
+        finally {
+            ois.close();
+        }
+
+    }
     public static void main(String[] args){
-        ArrayList<Correntista> listaDeClientes = new ArrayList<Correntista>();
+
+        Banco banco = new Banco();
+        
         System.out.println("-------------------CLIENTES ---------------------------");
         CorrentistaFisico correntista1 = new CorrentistaFisico("Henrique", new ContaFisica());
-        listaDeClientes.add(correntista1);
+        banco.getListaDeClientes().add(correntista1);
         CorrentistaFisico correntista2 = new CorrentistaFisico("João", new ContaFisica());
-        listaDeClientes.add(correntista2);
+        banco.getListaDeClientes().add(correntista2);
         CorrentistaFisico correntista3 = new CorrentistaFisico("Maria", new ContaFisica());
-        listaDeClientes.add(correntista3);
+        banco.getListaDeClientes().add(correntista3);
         CorrentistaJuridico correntista4 = new CorrentistaJuridico("Henrique Dev", "Henrique Assis", new ContaJuridica());
-        listaDeClientes.add(correntista4);
+        banco.getListaDeClientes().add(correntista4);
+
+        try {
+            banco.SalvaClientes();
+        } catch (IOException e){}
+
+        try {
+            banco.leClientes();
+            for(Correntista c: banco.getListaDeClientes()){
+                System.out.println(c.getNome());
+            }
+        } catch (Exception e){}
 
         correntista1.exibeIdentificacao();
         correntista2.exibeIdentificacao();

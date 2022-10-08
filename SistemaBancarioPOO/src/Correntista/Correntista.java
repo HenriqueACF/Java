@@ -1,7 +1,8 @@
 package Correntista;
 import Conta.Interface.Conta;
+import java.io.Serializable;
 
-public abstract class Correntista {
+public abstract class Correntista implements Serializable {
     private static int proxCodigo = 1;
     private Conta conta;
     private int codigo;
