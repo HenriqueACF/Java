@@ -24,11 +24,19 @@ public class Banco {
         correntista3.exibeIdentificacao();
         correntista4.exibeIdentificacao();
 
-        System.out.println("-------------------EMPRESTIMO PESSOA FISICA---------------------------");
-        double valorParcelaPF = correntista1.getConta().simulaEmprestimo(2000, 24);
-        System.out.println("O valor das parcelas será: R"+ NumberFormat.getCurrencyInstance().format(valorParcelaPF));
-        System.out.println("-------------------EMPRESTIMO PESSOA FISICA---------------------------");
-        double valorParcelaPJ = correntista4.getConta().simulaEmprestimo(20000, 12);
-        System.out.println("O valor das parcelas será: R"+ NumberFormat.getCurrencyInstance().format(valorParcelaPJ));
+        try{
+            System.out.println("-------------------EMPRESTIMO PESSOA FISICA---------------------------");
+            double valorParcelaPF = correntista1.getConta().simulaEmprestimo(2000, 24);
+            System.out.println("O valor das parcelas será: R"+ NumberFormat.getCurrencyInstance().format(valorParcelaPF));
+        }catch (IllegalArgumentException e){
+            System.out.println("Digite valores validos");        }
+
+        try{
+            System.out.println("-------------------EMPRESTIMO PESSOA FISICA---------------------------");
+            double valorParcelaPJ = correntista4.getConta().simulaEmprestimo(20000, 12);
+            System.out.println("O valor das parcelas será: R"+ NumberFormat.getCurrencyInstance().format(valorParcelaPJ));
+        }catch (IllegalArgumentException e){
+            System.out.println("Digite valores validos");
+        }
     }
 }

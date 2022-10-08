@@ -29,7 +29,12 @@ public class ContaFisica implements Conta {
 
     //I = taxa de juros
     @Override
-    public double simulaEmprestimo(double cf, int n) {
-        return I/(1-1/Math.pow(1+I, n))*cf;
+    public double simulaEmprestimo(double cf, int n) throws  IllegalArgumentException{
+        if(cf <= 0.0 || n <= 0){
+            throw new IllegalArgumentException();
+        }else
+        {
+            return I/(1-1/Math.pow(1+I, n))*cf;
+        }
     }
 }
