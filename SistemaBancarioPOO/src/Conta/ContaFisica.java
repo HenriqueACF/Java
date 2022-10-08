@@ -12,13 +12,13 @@ public class ContaFisica implements Conta {
     }
 
     @Override
-    public void deposito(double valor) {
+    public synchronized void deposito(double valor) {
     saldo += valor;
         System.out.println("Valor depositado: "+ valor);
     }
 
     @Override
-    public void saque(double valor) {
+    public synchronized void saque(double valor) {
         if(valor <= saldo){
             saldo -= valor;
             System.out.println("Valor sacado: "+ valor);
@@ -38,3 +38,4 @@ public class ContaFisica implements Conta {
         }
     }
 }
+

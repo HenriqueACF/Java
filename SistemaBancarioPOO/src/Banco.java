@@ -1,5 +1,6 @@
 import Conta.ContaFisica;
 import Conta.ContaJuridica;
+import Conta.SaqueATM;
 import Correntista.Correntista;
 import Correntista.CorrentistaFisico;
 import Correntista.CorrentistaJuridico;
@@ -53,20 +54,32 @@ public class Banco {
     public static void main(String[] args){
 
         Banco banco = new Banco();
-        
-        System.out.println("-------------------CLIENTES ---------------------------");
-        CorrentistaFisico correntista1 = new CorrentistaFisico("Henrique", new ContaFisica());
-        banco.getListaDeClientes().add(correntista1);
-        CorrentistaFisico correntista2 = new CorrentistaFisico("João", new ContaFisica());
-        banco.getListaDeClientes().add(correntista2);
-        CorrentistaFisico correntista3 = new CorrentistaFisico("Maria", new ContaFisica());
-        banco.getListaDeClientes().add(correntista3);
-        CorrentistaJuridico correntista4 = new CorrentistaJuridico("Henrique Dev", "Henrique Assis", new ContaJuridica());
-        banco.getListaDeClientes().add(correntista4);
+        ContaFisica conta = new ContaFisica();
+        conta.deposito(1000);
 
-        try {
-            banco.SalvaClientes();
-        } catch (IOException e){}
+        CorrentistaFisico joao = new CorrentistaFisico("joao", conta);
+        CorrentistaFisico maria = new CorrentistaFisico("maria", conta);
+
+        SaqueATM saqueJoao = new SaqueATM(joao.getConta(), 500);
+        SaqueATM saqueMaria = new SaqueATM(maria.getConta(), 300);
+
+        saqueJoao.start();
+        saqueMaria.start();
+
+        
+//        System.out.println("-------------------CLIENTES ---------------------------");
+//        CorrentistaFisico correntista1 = new CorrentistaFisico("Henrique", new ContaFisica());
+//        banco.getListaDeClientes().add(correntista1);
+//        CorrentistaFisico correntista2 = new CorrentistaFisico("João", new ContaFisica());
+//        banco.getListaDeClientes().add(correntista2);
+//        CorrentistaFisico correntista3 = new CorrentistaFisico("Maria", new ContaFisica());
+//        banco.getListaDeClientes().add(correntista3);
+//        CorrentistaJuridico correntista4 = new CorrentistaJuridico("Henrique Dev", "Henrique Assis", new ContaJuridica());
+//        banco.getListaDeClientes().add(correntista4);
+//
+//        try {
+//            banco.SalvaClientes();
+//        } catch (IOException e){}
 
         try {
             banco.leClientes();
@@ -75,24 +88,24 @@ public class Banco {
             }
         } catch (Exception e){}
 
-        correntista1.exibeIdentificacao();
-        correntista2.exibeIdentificacao();
-        correntista3.exibeIdentificacao();
-        correntista4.exibeIdentificacao();
+//        correntista1.exibeIdentificacao();
+//        correntista2.exibeIdentificacao();
+//        correntista3.exibeIdentificacao();
+//        correntista4.exibeIdentificacao();
 
-        try{
-            System.out.println("-------------------EMPRESTIMO PESSOA FISICA---------------------------");
-            double valorParcelaPF = correntista1.getConta().simulaEmprestimo(2000, 24);
-            System.out.println("O valor das parcelas será: R"+ NumberFormat.getCurrencyInstance().format(valorParcelaPF));
-        }catch (IllegalArgumentException e){
-            System.out.println("Digite valores validos");        }
-
-        try{
-            System.out.println("-------------------EMPRESTIMO PESSOA FISICA---------------------------");
-            double valorParcelaPJ = correntista4.getConta().simulaEmprestimo(20000, 12);
-            System.out.println("O valor das parcelas será: R"+ NumberFormat.getCurrencyInstance().format(valorParcelaPJ));
-        }catch (IllegalArgumentException e){
-            System.out.println("Digite valores validos");
-        }
+//        try{
+//            System.out.println("-------------------EMPRESTIMO PESSOA FISICA---------------------------");
+//            double valorParcelaPF = correntista1.getConta().simulaEmprestimo(2000, 24);
+//            System.out.println("O valor das parcelas será: R"+ NumberFormat.getCurrencyInstance().format(valorParcelaPF));
+//        }catch (IllegalArgumentException e){
+//            System.out.println("Digite valores validos");        }
+//
+//        try{
+//            System.out.println("-------------------EMPRESTIMO PESSOA FISICA---------------------------");
+//            double valorParcelaPJ = correntista4.getConta().simulaEmprestimo(20000, 12);
+//            System.out.println("O valor das parcelas será: R"+ NumberFormat.getCurrencyInstance().format(valorParcelaPJ));
+//        }catch (IllegalArgumentException e){
+//            System.out.println("Digite valores validos");
+//        }
     }
 }
