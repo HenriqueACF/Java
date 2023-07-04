@@ -23,37 +23,38 @@ public class Board {
     }
 
     public Piece piece(int row, int column){
-        if(!positionExists(row, column)){
-            throw  new BoardException("Posição fora do tabuleiro");
+        if (!positionExists(row, column)) {
+            throw new BoardException("Posição fora do Tabuleiro");
         }
         return pieces[row][column];
     }
 
     public Piece piece(Position position){
-        if(!positionExists(position)){
-            throw  new BoardException("Posição fora do tabuleiro");
+        if (!positionExists(position)) {
+            throw new BoardException("Posição fora do Tabuleiro");
         }
         return pieces[position.getRow()][position.getColumn()];
     }
 
     public void placePiece(Piece piece, Position position){
-        if(thereIsAPiece(position)){
-            throw new BoardException("Há uma peça na posição: " + position);
+        if (thereIsAPiece(position)) {
+            throw new BoardException("Há uma peça nessa posição " + position);
         }
         pieces[position.getRow()][position.getColumn()] = piece;
         piece.position = position;
     }
 
-    private boolean positionExists(int row, int column){
-        return row >= 0 && rows < row && column >= 0 && column < columns;
+    private boolean positionExists(int row, int column) {
+        return row >= 0 && row < rows && column >= 0 && column < columns;
     }
-    public boolean positionExists(Position position){
+
+    public boolean positionExists(Position position) {
         return positionExists(position.getRow(), position.getColumn());
     }
 
-    public boolean thereIsAPiece(Position position){
-        if(!positionExists(position)){
-            throw  new BoardException("Posição fora do tabuleiro" + position);
+    public boolean thereIsAPiece(Position position) {
+        if (!positionExists(position)) {
+            throw new BoardException("Posição fora do Tabuleiro");
         }
         return piece(position) != null;
     }
